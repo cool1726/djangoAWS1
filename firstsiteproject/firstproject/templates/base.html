@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title> Siwon's Blog </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <ul class="navbar">
+        <li><a class="active" href="{% url 'home' %}">BLOG</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'gallery' %}">Gallery</a></li>
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+            <button class="dropbtn">{{ user.username }}님, 안녕하세요!</button>
+            <div class="dropdown-content">
+                <a href="{% url 'mypage' %}">My Page</a>
+                <a href="{% url 'new' %}">글쓰기</a>
+                <a href="{% url 'fake' %}">Fake</a>
+                <a href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
+                <form id="logout" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %} <input type="hidden">
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <li><a href="{% url 'signup' %}">SignUp</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+        
+    </ul>
+
+    <div class="base-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>

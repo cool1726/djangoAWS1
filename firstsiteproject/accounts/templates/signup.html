@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="account-container">
+    <h1>회원가입</h1>
+
+    {% if error %}
+    {{ error }}
+    <br> <br> <br>
+    {% endif %}
+    <form class="account-form" method="POST" action="{% url 'signup' %}">
+
+        {% csrf_token %}
+        <div class="account-inner-form">
+            아이디
+            <input name="username" type="text" value="">
+            <br>
+            비밀번호
+            <input name="password1" type="password" value="">
+            <br>
+            비밀번호 확인
+            <input name="password2" type="password" value="">
+        </div>
+        
+        <br>
+        <br>
+        <input class="menu-wide-btn" type="submit" value="SignUp">
+    </form>
+
+</div>
+
+{% endblock %}

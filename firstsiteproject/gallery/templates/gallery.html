@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="gallery-container">
+    <div class="gallery-header">
+        <h1>My Gallery</h1>
+        <h4>by black</h4>
+    </div>
+
+    <div class="card-container">
+        {% for gallery in galleries.all %}
+            <div class="card">
+                <div class="card-img">
+                    <img src="{{ gallery.image.url }}" alt="card image cap" style="width:100%;height:100%;object-fit: contain;">
+                </div>
+                <div class="card-descript">
+                <h4><b>{{ gallery.title }}</b></h4> 
+                <p>@{{ gallery.place }}</p> 
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+</div>
+
+{% endblock %}
